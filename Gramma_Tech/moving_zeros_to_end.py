@@ -20,6 +20,20 @@ def moveZerosToEnd(arr):
         i += 1
     return arr
 
+def moveZerosToEnd_simplified(arr):
+    n = len(arr)
+    i = 0
+    while i < len(arr):
+        if arr[i] == 0:
+            del arr[i]
+        else:
+            i += 1
+
+    while len(arr) < n:
+        arr.append(0)
+
+    return arr
+
 class Test(unittest.TestCase):
     def setup(self):
         pass
@@ -29,6 +43,13 @@ class Test(unittest.TestCase):
     def test_2(self):
         arr = [0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4]
         self.assertTrue(moveZerosToEnd(arr), [1, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+    def test_3(self):
+        arr = [1, 10, 0, 2, 8, 3, 0, 0, 6, 4, 0, 5, 7, 0]
+        self.assertEqual(moveZerosToEnd_simplified(arr), [1, 10, 2, 8, 3, 6, 4, 5, 7, 0, 0, 0, 0, 0])
+    def test_4(self):
+        arr = [0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4]
+        self.assertTrue(moveZerosToEnd_simplified(arr), [1, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
     def tearDown(self):
         pass
