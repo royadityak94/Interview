@@ -1,0 +1,42 @@
+[2020-09-03 00:14:51,260] {taskinstance.py:670} INFO - Dependencies all met for <TaskInstance: alt_ingestion_pipeline.refresh_auction_listing 2020-09-02T00:00:00+00:00 [queued]>
+[2020-09-03 00:14:51,304] {taskinstance.py:670} INFO - Dependencies all met for <TaskInstance: alt_ingestion_pipeline.refresh_auction_listing 2020-09-02T00:00:00+00:00 [queued]>
+[2020-09-03 00:14:51,305] {taskinstance.py:880} INFO - 
+--------------------------------------------------------------------------------
+[2020-09-03 00:14:51,305] {taskinstance.py:881} INFO - Starting attempt 1 of 2
+[2020-09-03 00:14:51,305] {taskinstance.py:882} INFO - 
+--------------------------------------------------------------------------------
+[2020-09-03 00:14:51,333] {taskinstance.py:901} INFO - Executing <Task(PythonOperator): refresh_auction_listing> on 2020-09-02T00:00:00+00:00
+[2020-09-03 00:14:51,356] {standard_task_runner.py:54} INFO - Started process 31569 to run task
+[2020-09-03 00:14:51,405] {standard_task_runner.py:77} INFO - Running: ['airflow', 'run', 'alt_ingestion_pipeline', 'refresh_auction_listing', '2020-09-02T00:00:00+00:00', '--job_id', '9', '--pool', 'default_pool', '--raw', '-sd', 'DAGS_FOLDER/alt_ingestion_pipeline.py', '--cfg_path', '/tmp/tmpbjo2z_16']
+[2020-09-03 00:14:51,407] {standard_task_runner.py:78} INFO - Job 9: Subtask refresh_auction_listing
+[2020-09-03 00:14:51,675] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: alt_ingestion_pipeline.refresh_auction_listing 2020-09-02T00:00:00+00:00 [running]> MSI.localdomain
+[2020-09-03 00:15:00,564] {python_operator.py:114} INFO - Done. Returned value was: None
+[2020-09-03 00:15:00,592] {taskinstance.py:1070} INFO - Marking task as SUCCESS.dag_id=alt_ingestion_pipeline, task_id=refresh_auction_listing, execution_date=20200902T000000, start_date=20200903T041451, end_date=20200903T041500
+[2020-09-03 00:15:01,250] {local_task_job.py:102} INFO - Task exited with return code 0
+[2020-09-03 00:17:45,230] {taskinstance.py:670} INFO - Dependencies all met for <TaskInstance: alt_ingestion_pipeline.refresh_auction_listing 2020-09-02T00:00:00+00:00 [queued]>
+[2020-09-03 00:17:45,263] {taskinstance.py:670} INFO - Dependencies all met for <TaskInstance: alt_ingestion_pipeline.refresh_auction_listing 2020-09-02T00:00:00+00:00 [queued]>
+[2020-09-03 00:17:45,263] {taskinstance.py:880} INFO - 
+--------------------------------------------------------------------------------
+[2020-09-03 00:17:45,263] {taskinstance.py:881} INFO - Starting attempt 1 of 2
+[2020-09-03 00:17:45,263] {taskinstance.py:882} INFO - 
+--------------------------------------------------------------------------------
+[2020-09-03 00:17:45,291] {taskinstance.py:901} INFO - Executing <Task(PythonOperator): refresh_auction_listing> on 2020-09-02T00:00:00+00:00
+[2020-09-03 00:17:45,314] {standard_task_runner.py:54} INFO - Started process 246 to run task
+[2020-09-03 00:17:45,478] {standard_task_runner.py:77} INFO - Running: ['airflow', 'run', 'alt_ingestion_pipeline', 'refresh_auction_listing', '2020-09-02T00:00:00+00:00', '--job_id', '14', '--pool', 'default_pool', '--raw', '-sd', 'DAGS_FOLDER/alt_ingestion_pipeline.py', '--cfg_path', '/tmp/tmpj10c5_kg']
+[2020-09-03 00:17:45,479] {standard_task_runner.py:78} INFO - Job 14: Subtask refresh_auction_listing
+[2020-09-03 00:17:45,572] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: alt_ingestion_pipeline.refresh_auction_listing 2020-09-02T00:00:00+00:00 [running]> MSI.localdomain
+[2020-09-03 00:17:51,685] {taskinstance.py:1150} ERROR - name 'indAll' is not defined
+Traceback (most recent call last):
+  File "/home/aditya/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 984, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/home/aditya/.local/lib/python3.7/site-packages/airflow/operators/python_operator.py", line 113, in execute
+    return_value = self.execute_callable()
+  File "/home/aditya/.local/lib/python3.7/site-packages/airflow/operators/python_operator.py", line 118, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/mnt/c/Users/adity/Downloads/Interview/Alt_DE/psacard/loadall_auction_items.py", line 41, in main
+    fetch_auction_items(AUCTION_PRICES_PATH, BASE_PATH, SAVE_PATH, 'w')
+  File "/mnt/c/Users/adity/Downloads/Interview/Alt_DE/psacard/loadall_auction_items.py", line 29, in fetch_auction_items
+    item_info['count'] = int(item.f-indAll('td')[-1].contents[0])
+NameError: name 'indAll' is not defined
+[2020-09-03 00:17:51,689] {taskinstance.py:1194} INFO - Marking task as UP_FOR_RETRY. dag_id=alt_ingestion_pipeline, task_id=refresh_auction_listing, execution_date=20200902T000000, start_date=20200903T041745, end_date=20200903T041751
+[2020-09-03 00:17:55,219] {local_task_job.py:102} INFO - Task exited with return code 1

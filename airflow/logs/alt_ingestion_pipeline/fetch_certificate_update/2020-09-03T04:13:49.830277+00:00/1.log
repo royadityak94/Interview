@@ -1,0 +1,16 @@
+[2020-09-03 00:15:05,504] {taskinstance.py:670} INFO - Dependencies all met for <TaskInstance: alt_ingestion_pipeline.fetch_certificate_update 2020-09-03T04:13:49.830277+00:00 [queued]>
+[2020-09-03 00:15:05,587] {taskinstance.py:670} INFO - Dependencies all met for <TaskInstance: alt_ingestion_pipeline.fetch_certificate_update 2020-09-03T04:13:49.830277+00:00 [queued]>
+[2020-09-03 00:15:05,587] {taskinstance.py:880} INFO - 
+--------------------------------------------------------------------------------
+[2020-09-03 00:15:05,587] {taskinstance.py:881} INFO - Starting attempt 1 of 2
+[2020-09-03 00:15:05,587] {taskinstance.py:882} INFO - 
+--------------------------------------------------------------------------------
+[2020-09-03 00:15:05,595] {taskinstance.py:901} INFO - Executing <Task(PythonOperator): fetch_certificate_update> on 2020-09-03T04:13:49.830277+00:00
+[2020-09-03 00:15:05,621] {standard_task_runner.py:54} INFO - Started process 31736 to run task
+[2020-09-03 00:15:05,784] {standard_task_runner.py:77} INFO - Running: ['airflow', 'run', 'alt_ingestion_pipeline', 'fetch_certificate_update', '2020-09-03T04:13:49.830277+00:00', '--job_id', '11', '--pool', 'default_pool', '--raw', '-sd', 'DAGS_FOLDER/alt_ingestion_pipeline.py', '--cfg_path', '/tmp/tmpi8d38_vq']
+[2020-09-03 00:15:05,785] {standard_task_runner.py:78} INFO - Job 11: Subtask fetch_certificate_update
+[2020-09-03 00:15:05,878] {logging_mixin.py:112} INFO - Running %s on host %s <TaskInstance: alt_ingestion_pipeline.fetch_certificate_update 2020-09-03T04:13:49.830277+00:00 [running]> MSI.localdomain
+[2020-09-03 00:15:05,941] {logging_mixin.py:112} INFO - Total New Certificates Added =  0
+[2020-09-03 00:15:05,942] {python_operator.py:114} INFO - Done. Returned value was: None
+[2020-09-03 00:15:05,975] {taskinstance.py:1070} INFO - Marking task as SUCCESS.dag_id=alt_ingestion_pipeline, task_id=fetch_certificate_update, execution_date=20200903T041349, start_date=20200903T041505, end_date=20200903T041505
+[2020-09-03 00:15:10,466] {local_task_job.py:102} INFO - Task exited with return code 0
