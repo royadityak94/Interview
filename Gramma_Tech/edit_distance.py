@@ -52,10 +52,37 @@ def calculate_levenshtein_distance_dp(str1, str2):
 
     return dp[len(str1)][len(str2)]
 
+def calculate_levenshtein_distance_td_dp(str1, str2):
+    # Using top-down DP
+    if not str1 and not str2:
+        return 0
+    if not str1 and str2:
+        return len(str2)
+    if str1 and not str2:
+        return len(str1)
+    else:
+        dp = [[-1 for _ in range(len(str2)+1)] for _ in range(len(str1)+1)]
+        return calculate_levenshtein_distance_td_dp_recursive(dp, str1, str2, len(str1), len(str2))
+
+def calculate_levenshtein_distance_td_dp_recursive(dp, str1, str2, i, j):
+    if i == 0:
+        return j
+    if j == 0:
+        return i
+
+    if str1[i-1] == str2[j-1] and dp[i-1][j-1] == -1:
+        dp[i][j] = calculate_levenshtein_distance_recursive(str1, str2, i-1, j-1)
+
+    else:
+        dp[i][j] = 1 + min(calculate_levenshtein_distance_recursive(str1, str2, i-1, j),
+            calculate_levenshtein_distance_recursive(str1, str2, i, j-1))
+    return dp[i][j]
+
+
 class Test(unittest.TestCase):
-    def setUp(self):
+    def setup(self):
         pass
-    def tearDown(self):
+    def teardown(self):
         pass
     def test_recursion(self):
         # Using plain recursion
@@ -66,8 +93,17 @@ class Test(unittest.TestCase):
         self.assertEqual(calculate_levenshtein_distance("", "blue"), 4)
         self.assertEqual(calculate_levenshtein_distance("blue", ""), 4)
 
-    def test_dp(self):
-        # Using Dynamic Programming
+    def test_top_down_dp(self):
+        # Using top down Dynamic Programming
+        self.assertEqual(calculate_levenshtein_distance_td_dp("dog", "frog"), 3)
+        self.assertEqual(calculate_levenshtein_distance_td_dp("some", "some"), 0)
+        self.assertEqual(calculate_levenshtein_distance_td_dp("some", "thing"), 9)
+        self.assertEqual(calculate_levenshtein_distance_td_dp("", ""), 0)
+        self.assertEqual(calculate_levenshtein_distance_td_dp("", "blue"), 4)
+        self.assertEqual(calculate_levenshtein_distance_td_dp("blue", ""), 4)
+
+    def test_bottom_up_dp(self):
+        # Using bottom up Dynamic Programming
         self.assertEqual(calculate_levenshtein_distance_dp("dog", "frog"), 3)
         self.assertEqual(calculate_levenshtein_distance_dp("some", "some"), 0)
         self.assertEqual(calculate_levenshtein_distance_dp("some", "thing"), 9)
