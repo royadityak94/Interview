@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # Exclude root folder
-Root*/
+*.txt
 *.tgz
