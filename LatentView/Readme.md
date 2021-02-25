@@ -126,8 +126,8 @@ Testing: 3 hours
 Other Logistics (Formatting, Commenting, Documentation): 4 hours
 ```
 
-### Thank-you Note
+### Thank You Note
 
-Thank you for your effort, time in reading the Readme file and thereby my other code segments. Should you have suggestions/advice on anything about the code piece, please reach out: [email](#mailto:p.adityak.roy@gmail.com).
+Thank you for your effort, time in reading the Readme file and thereby my other code segments. Should you have suggestions/advice on anything about the code piece, please reach out: [email](mailto:p.adityak.roy@gmail.com).
 
-Github Repo: [@royadityak94](#https://github.com/royadityak94), [@royadityak](#https://github.com/royadityak)
+Github Repo: [@royadityak94](https://github.com/royadityak94), [@royadityak](https://github.com/royadityak)
