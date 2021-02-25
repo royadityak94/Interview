@@ -129,7 +129,5 @@ dmypy.json
 .pyre/
 
 # Exclude root folder
-*.txt
 *.tgz
 .pickle
-
