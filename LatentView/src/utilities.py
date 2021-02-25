@@ -12,7 +12,7 @@ def fetch_working_variables(properties_var, group_name):
     """
     assert properties_var, "Property Variable (properties_var) cannot be empty"
     assert group_name, "Group Name Variable (group_name) cannot be empty"
-    
+
     if os.path.exists(properties_var):
         config = RawConfigParser()
         config.read(properties_var)
@@ -24,7 +24,9 @@ def fetch_working_variables(properties_var, group_name):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), properties_var)
     return
 
-def is_non_zero_file(filepath):  
+def is_non_zero_file(filepath):
+    """Module to validate filepath and content presence
+    """
     return os.path.isfile(filepath) and os.path.getsize(filepath) > 0
 
 def fetch_dictionary_file(dict_file_path):
@@ -33,9 +35,8 @@ def fetch_dictionary_file(dict_file_path):
     assert is_non_zero_file(dict_file_path), "Empty file, please proceed to load the dictionary first"
     with open(dict_file_path, 'rb') as handle:
         character_dictionary = pickle.load(handle)
-    
     return character_dictionary
-    
+
 def persist_dictionary_file(character_dictionary, dict_file_path):
     """Module to persist dictionary file at a given path
     """
@@ -43,11 +44,13 @@ def persist_dictionary_file(character_dictionary, dict_file_path):
     dict_file_dir = dict_file_path[:len(dict_file_path) - dict_file_path[::-1].find('/')]
     if not os.path.exists(dict_file_dir):
         os.makedirs(dict_file_dir, exist_ok=True)
-        
+
     with open(dict_file_path, 'wb') as handle:
         pickle.dump(character_dictionary, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        
+
 def fetch_dictionary_information(properties=None, group = None):
+    """Module to fetch dictionary information
+    """
     if not properties:
         properties = '../environment.properties'
     if not group:
@@ -55,16 +58,20 @@ def fetch_dictionary_information(properties=None, group = None):
     environ_variables = fetch_working_variables(properties_var= properties, group_name= group)
     dict_file_path = os.path.join(environ_variables['working.dir'], 'shelve_dict.pickle')
     assert os.path.exists(dict_file_path), 'The dictionary file is missing!'
-    return dict_file_path      
-        
+    return dict_file_path
+
 def swap(i, j, array):
+    """Module to swap array indexes
+    """
     array[i], array[j] = array[j], array[i]
-    
+
 def formatted_strings(input_lst):
+    """Module to pre-process input file contents
+    """
     start = 0
     end = len(input_lst)-1
     while start < len(input_lst):
-        if not input_lst[start].isalpha(): 
+        if not input_lst[start].isalpha():
             swap(start, end, input_lst)
             input_lst.pop()
             end -= 1
@@ -74,6 +81,8 @@ def formatted_strings(input_lst):
     return input_lst
 
 def load_data_from_file(file_path):
+    """Module to load file data
+    """
     assert os.path.exists(file_path), \
             "File not found in the input path: {file_path}".format(file_path)
     parsed_data = []
@@ -84,6 +93,8 @@ def load_data_from_file(file_path):
     return frozenset(parsed_data)
 
 def create_dictionary(data, dict_file_path, CharacterMap):
+    """Module to create dictionary file
+    """
     character_dictionary = dict()
     for word in data:
         chars = word.lower()

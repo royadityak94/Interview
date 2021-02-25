@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+
+# Loading requisite modules
 from character_tree import CharacterMap
 from utilities import fetch_dictionary_file, persist_dictionary_file, fetch_working_variables, fetch_dictionary_information, is_non_zero_file
 import argparse
@@ -8,20 +10,32 @@ import mmap
 
 def add_new_words(new_words):
     """Module to support custom new words into the dictionary
+        Utility to support adding new words after the dictionary creation or to
+        extend existing dictionary with domain-specific words
+
+    Parameters
+    ----------
+        new_words*: Array of (new) words to be added to the dictionary or domain-specific words
+    Returns
+    -------
+        None
+    (* - Required parameters)
     """
+    if not new_words:
+        return
+
     # Fetch the dictionary
     dict_file_path = fetch_dictionary_information()
     character_dictionary = fetch_dictionary_file(dict_file_path)
-    
+
     for word in new_words:
         if len(word):
             chars = word.lower()
             character_dictionary.update({chars: CharacterMap(chars)})
     try:
         persist_dictionary_file(character_dictionary, dict_file_path)
-    except Exception as ex: 
-        print ("The process couldn't complete.")
-        raise Exception(ex)
+    except Exception as ex:
+        raise Exception("The process couldn't complete: %s" % str(ex))
     return
 
 if __name__ == '__main__':
