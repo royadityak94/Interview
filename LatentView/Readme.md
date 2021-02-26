@@ -13,7 +13,7 @@ An Anagram is a word or phrase made by rearranging the letters of another word o
 
 ```
 Get 'loop'
-Get 'loop', 2
+Get 'loop', 1
 Get 'berzentini'
 Add ['berzentini', 'brezentini', 'beeriizntn', 'beerzntnnii']
 Get 'berzentini'
@@ -23,15 +23,15 @@ Get 'berzentini', 1
 ### Expected output (corresponding output):
 
 ```
-loop, polo, pool
-loop, polo
+polo, pool
+polo
 
 brezentini, beeriizntn, beerzntnnii
 brezentini
 ```
 
 ## Explanation:
-We have used 'nltk' as our word-dictionary, but the implementation makes it possible to use any dictionary or even file-based load. The first input 'loop' has several well-known word anagrams like the loop, polo, pool. The second input limits the number of returned anagrams to 2. The third input requests anagram for an inexistent word 'berzentini'. So, no anagrams are returned. However, we then proceed to add 'berzentini' and its known word anagrams to the dictionary, following which we can support anagram request on 'berzentini'.
+We have used 'nltk' as our word-dictionary, but the implementation makes it possible to use any dictionary or even file-based load. The first input 'loop' has several well-known word anagrams like the polo, pool. The second input limits the number of returned anagrams to 1. The third input requests anagram for an inexistent word 'berzentini'. So, no anagrams are returned. However, we then proceed to add 'berzentini' and its known word anagrams to the dictionary, following which we can support anagram request on 'berzentini'.
 
 The scenario of supporting custom words is pretty common across a domain, industry-specific applications like health-sciences or specific company-specific dialects like 'googleyness', etc.
 
