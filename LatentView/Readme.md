@@ -63,7 +63,7 @@ The second approach is to load the word file, and generate all permutations of t
 
 ### Solution-2: Using Letter Inventory from processed word file
 
-<b>Reference File:</b> `character_tree.py` <br/>
+<b>Reference File:</b> `src/character_tree.py` <br/>
 
 In this approach, we maintain active character counts from a-z of each letter in the text using a CharacterMap object that stores the words as a key and the CharacterMap object corresponding to the count of characters of that word. The CharacterMap supports setting character count, fetching count of a character, and even pruning over another CharacterMap. During runtime, making use of this abstraction, we use tree pruning to form remaining letter groups by subtracting the CharacterMap corresponding to a given word from the remaining words. The final result is built a single word at a time. Previously, we have mentioned the possibility of supporting approximate anagrams, which can be easily accomplished at this stage using backtracking and making two recursive calls using the current word and without the current word.
 
@@ -75,7 +75,7 @@ On another note, I was tempted to evaluate the idea of using open-source dynamic
 
 ### Approach 3: Solution using coroutines:
 
-<b>Reference File:</b> `anagram_class_coroutines.py` <br/>
+<b>Reference File:</b> `src/anagram_class_coroutines.py` <br/>
 
 In this approach, we generate anagrams on the fly (using a one-time dictionary creation) wherein we chain three different coroutines: leaves_inventory creation, mapping out anagrams, and merging the mapped anagrams. Furthermore, we only allow those merged combinations for which the size of generated anagrams is at-least greater than one, and we support only exact anagrams, which is in line with our documentation. A user can make use of the same loaded dictionary (under same class instantiation) to make multiple get requests that are returned in near O(1) time (some additional operations around shuffling, index deletion is performed on marginally sized grouped keys). The utility supports domain/industry-specific addition of customized words, alongside a loose coupling for custom datasets. Please reference the source code.
 
