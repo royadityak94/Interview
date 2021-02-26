@@ -55,13 +55,13 @@ In such an implementation, we could simply load the word file (that contains all
 
 <b> Complexity: </b> The time complexity is upper bounded by O(NMlogM), where N is the total words in the file, M is the maximum length of a word. The sorting of the word is performed in O(MLogM) time and O(1) space. The space complexity is O(k), where k is the number of matched words.
 
-### Approach: 2
+## Approach: 2
 
 The second approach is to load the word file, and generate all permutations of the input string, and verifying if they exist in the word file. All matched words are then returned.
 
 <b> Complexity: </b> The time complexity is upper bounded by O(N*(2^M)), where N is the total words in the file, M is the length of the input word. We spend O(2^M) time generating all permutations and for each permutation, we spend at most O(N) time in lookup. Though more unlikely, if the order of N and M are similar, the average time complexity is given by Catalan Number as O((4^M)/(N^.5)). The space complexity is O(k), where k is the number of matched words.
 
-### Solution-2: Using Letter Inventory from processed word file
+## Approach 3: Using Letter Inventory from processed word file
 
 <b>Reference File:</b> `src/character_tree.py` <br/>
 
@@ -73,7 +73,7 @@ As the CharacterMap uses a key/value store, we have used a built-in dictionary f
 
 On another note, I was tempted to evaluate the idea of using open-source dynamic key-value stores like Etcd, Zookeeper, Redis, etc. Or, a full-fledged open-source key/value DBs like BerkeleyDB, etc. that would support efficient handling of the disk-space. However, given our existing assumptions, imbibing complexities arising out of distributed technologies and their inherent tradeoffs was beyond our affordability from the requisite application. I believe our design choice is well-reasoned, optimal for large-scale usage.
 
-### Approach 3: Solution using coroutines:
+## Approach 4: Solution using coroutines:
 
 <b>Reference File:</b> `src/anagram_class_coroutines.py` <br/>
 
