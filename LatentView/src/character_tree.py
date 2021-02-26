@@ -3,9 +3,9 @@
 # Loading requisite modules
 import logging
 import argparse
-from utilities import fetch_dictionary_information, create_dictionary, load_data_from_file
+from utilities import fetch_dictionary_information, create_dictionary, load_data_from_file, fetch_word_list
 import os
-from nltk.corpus import words
+
 
 class CharacterMap:
     """Word mapper to coordinate letters of a word
@@ -82,21 +82,7 @@ def create_charmap_dictionary(input_data='nltk', file_path=None, logger=None):
         dict_file_path : String holding the path where the dictionary file has been persisted
     (* - Required parameters)
     """
-
-    data_list = None
-    if file_path or input_data != 'nltk':
-        if logger:
-            logger.info('Using File Path {filepath} to load the data'.format(filepath= file_path))
-        assert os.path.exists(file_path), "File not found in the file path"
-        data_list = load_data_from_file(file_path)
-        # Emptying the input file contents
-        open(args.file, "w").close()
-
-    else:
-        if logger:
-            logger.info('Using NLTK Library to load the data')
-        data_list = frozenset(words.words())
-    assert data_list is not None, "Data List is empty, nothing to proceed with!"
+    data_list = fetch_word_list(input_data, file_path, logger)
 
     # Fetch the dictionary
     dict_file_path = fetch_dictionary_information()

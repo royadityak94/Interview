@@ -19,11 +19,13 @@ def get_anagrams(input_string, maximum_size=None):
         generated_anagrams : List holding anagram strings
     (* - Required parameters)
     """
+    if not input_string.isalpha():
+        return list()
     # Fetch the dictionary
     dict_file_path = fetch_dictionary_information()
     character_dictionary = fetch_dictionary_file(dict_file_path)
     try:
-        reconstructed = CharacterMap(input_string)
+        reconstructed = CharacterMap(input_string.lower())
         generated_anagrams = list()
         for letters in character_dictionary.keys():
             if letters.isalpha() \

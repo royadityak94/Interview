@@ -36,7 +36,9 @@ class Anagram:
         self.character_dictionary = fetch_dictionary_file(dict_file_path)
 
     def get_anagrams(self, input_string, maximum_size=None):
-        reconstructed = CharacterMap(input_string)
+        if not input_string.isalpha():
+            return list()
+        reconstructed = CharacterMap(input_string.lower())
         generated_anagrams = list()
         for letters in self.character_dictionary.keys():
             if letters.isalpha() \

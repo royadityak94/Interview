@@ -6,6 +6,7 @@ import pickle
 import errno
 import os
 import mmap
+from nltk.corpus import words
 
 def fetch_working_variables(properties_var, group_name):
     """Module to fetch working variables
@@ -76,7 +77,8 @@ def formatted_strings(input_lst):
             input_lst.pop()
             end -= 1
         else:
-            input_lst[start] = input_lst[start].lower()
+            if not input_lst[start].islower():
+                input_lst[start] = input_lst[start].lower()
             start += 1
     return input_lst
 
@@ -100,3 +102,29 @@ def create_dictionary(data, dict_file_path, CharacterMap):
         chars = word.lower()
         character_dictionary.update({chars: CharacterMap(chars)})
     persist_dictionary_file(character_dictionary, dict_file_path)
+
+def fetch_word_list(input_data='nltk', file_path=None, logger=None):
+    """Module to fetch the relevant word_list from given input data or file_path
+    """
+    data_list = None
+    if file_path or input_data != 'nltk':
+        if logger:
+            logger.info('Using File Path {filepath} to load the data'.format(filepath= file_path))
+        assert os.path.exists(file_path), "File not found in the file path"
+        data_list = load_data_from_file(file_path)
+        # Emptying the input file contents
+        open(file_path, "w").close()
+
+    else:
+        if input_data.lower() == 'demo':
+            if logger:
+                logger.info('Loading demo data')
+            data_list = ['abc', 'acb', 'bca', 'iterl', 'Liter', 'elHlo', 'subessential', 'suitableness', 'hello', 'pool']
+        elif input_data.lower() == 'nltk':
+            if logger:
+                logger.info('Using NLTK Library to load the data')
+            data_list = words.words()
+        else:
+            raise Exception('The utility needs input data list to operate')
+    assert data_list is not None, "Data List is empty, nothing to proceed with!"
+    return frozenset(formatted_strings(data_list))

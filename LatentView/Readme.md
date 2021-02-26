@@ -89,7 +89,7 @@ python setup.py
 ```
 - First, create the dictionary by running `bash python character_tree.py`. The utility supports a bunch of other access patterns, the details of which can be synthesized from the actual implementations.
 - To run the test folder, navigate to ```bash src/tests ``` folder, and run any of the `test_*.py` files as ```bash python test_*.py```
-- To run all the tests, `bash python -m unittest *`
+- To run all the tests, enter the tests folder and run: `bash python -m unittest *`
 - To run the actual code files directly from command line, navigate to the src directory and run:
 ```bash
 python <file_name.py> -i <input_dir> -o <output_dir>
