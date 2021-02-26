@@ -48,14 +48,12 @@ From the problem statement, several assumptions can be levied, <ins>the most imp
 (E) We support only the exact anagram, i.e., the character count in the anagram and the input string are equal. Our implementation is easily extendible to approximate anagrams.
 ```
 
-## Solution-1: Single large word file supported anagram generation on the fly
-
-### Approach: 1
+### Approach 1: Single large word file supported anagram generation on the fly
 In such an implementation, we could simply load the word file (that contains all the words in a line-delimited fashion) and accept an input string argument, following which we iterate over all the words in the file sort them alphabetically and compare if the sorted word is same as the sorted input string, and we simply return all matched combinations.
 
 <b> Complexity: </b> The time complexity is upper bounded by O(NMlogM), where N is the total words in the file, M is the maximum length of a word. The sorting of the word is performed in O(MLogM) time and O(1) space. The space complexity is O(k), where k is the number of matched words.
 
-## Approach: 2
+## Approach 2: Generate all permutations of the input, and check for existence
 
 The second approach is to load the word file, and generate all permutations of the input string, and verifying if they exist in the word file. All matched words are then returned.
 
