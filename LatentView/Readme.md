@@ -1,4 +1,4 @@
-# Drivers Activities Reporting
+# Algorithmic Design: Generating Anagrams
 -------
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
@@ -73,6 +73,14 @@ As the CharacterMap uses a key/value store, we have used a built-in dictionary f
 
 On another note, I was tempted to evaluate the idea of using open-source dynamic key-value stores like Etcd, Zookeeper, Redis, etc. Or, a full-fledged open-source key/value DBs like BerkeleyDB, etc. that would support efficient handling of the disk-space. However, given our existing assumptions, imbibing complexities arising out of distributed technologies and their inherent tradeoffs was beyond our affordability from the requisite application. I believe our design choice is well-reasoned, optimal for large-scale usage.
 
+### Approach 3: Solution using coroutines:
+
+<b>Reference File:</b> `anagram_class_coroutines.py` <br/>
+
+In this approach, we generate anagrams on the fly (using a one-time dictionary creation) wherein we chain three different coroutines: leaves_inventory creation, mapping out anagrams, and merging the mapped anagrams. Furthermore, we only allow those merged combinations for which the size of generated anagrams is at-least greater than one, and we support only exact anagrams, which is in line with our documentation. A user can make use of the same loaded dictionary (under same class instantiation) to make multiple get requests that are returned in near O(1) time (some additional operations around shuffling, index deletion is performed on marginally sized grouped keys). The utility supports domain/industry-specific addition of customized words, alongside a loose coupling for custom datasets. Please reference the source code.
+
+<b> Complexity: </b> The time complexity of the system in building the dictionary is upper bounded by O(NMLogM) where N is the total words in the file, M is the maximum length of the input word. The space complexity of the system is O(1) as we aren't maintaining all the words in our dictionary. However, the complexity for processing anagrams is upper bounded by O(N), since in the worst case, we need to look across all the grouped keys. The time complexity for adding new words is upper bounded by O(N'MLogM), wherein N' is the total length of new words added to the dictionary.
+
 ### Setup
 
 - Python 3 (>=3.5)
@@ -121,7 +129,7 @@ N.B: The working directory `working` hosts the generated dictionary file. The te
 ### Estimated Developmental Effort:
 
 ```
-Development: 2.5-3 hours
+Development: 3 hours
 Testing: 3 hours
 Other Logistics (Formatting, Commenting, Documentation): 4 hours
 ```
